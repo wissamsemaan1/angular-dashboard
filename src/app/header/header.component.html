@@ -1,18 +1,27 @@
 <header>
-  <div class="logo">Dashboard</div>
+  <h1 class="logo">Dashboard</h1>
   <input type="text" #searchInput placeholder="Search by ID" (input)="searchUser(searchInput.value)" style="border: none;
   background: #eaebef;
   border-bottom: 1px solid #666;">
 </header>
 
-<div *ngIf="filteredUsers.length > 0">
-  <ul>
-    <li *ngFor="let user of filteredUsers" (click)="selectUser(user)">
-      {{ user.id }}
-    </li>
-  </ul>
-</div>
+<div *ngIf="searchInput.value.length > 0">
+  <div *ngIf="users.length > 0">
+    <ul>
+      <li *ngFor="let user of users">
+        <ul>
+          <li *ngIf="user.id">ID: {{ user.id }}</li>
+          <li *ngIf="user.first_name || user.last_name">Name: {{ user.first_name }} {{ user.last_name }}</li>
+          <li *ngIf="user.email">Email: {{ user.email }}</li>
+          <li *ngIf="user.avatar">
+            <img [src]="user.avatar" alt="User Image" />
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 
-<div *ngIf="filteredUsers.length === 0 && searchValue.length > 0">
-  No results found for "{{ searchValue }}".
+  <div *ngIf="users.length === 0">
+    No results found for "{{ searchInput.value }}".
+  </div>
 </div>
