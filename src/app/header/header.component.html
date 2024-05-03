@@ -1,0 +1,18 @@
+<header>
+  <div class="logo">Dashboard</div>
+  <input type="text" #searchInput placeholder="Search by ID" (input)="searchUser(searchInput.value)" style="border: none;
+  background: #eaebef;
+  border-bottom: 1px solid #666;">
+</header>
+
+<div *ngIf="filteredUsers.length > 0">
+  <ul>
+    <li *ngFor="let user of filteredUsers" (click)="selectUser(user)">
+      {{ user.id }}
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="filteredUsers.length === 0 && searchValue.length > 0">
+  No results found for "{{ searchValue }}".
+</div>
